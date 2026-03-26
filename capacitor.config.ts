@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'Dopamind',
   webDir: 'out',
   server: {
-    url: 'https://dopamind-w3fp.vercel.app',
+    url: 'https://dopamind-wjfp.vercel.app',
     cleartext: false,
     androidScheme: 'https',
   },
