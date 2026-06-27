@@ -1,27 +1,25 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { TimerProvider } from "@/context/timer-context";
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: "Dopamind",
-  description: "ADHD Productivity App",
-};
+  title: 'React Bits',
+  description: 'May these lights guide you on your path.',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <TimerProvider>
-          {children}
-        </TimerProvider>
-      </body>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} h-full`}>{children}</body>
     </html>
-  );
+  )
 }
