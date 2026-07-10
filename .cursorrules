@@ -1,0 +1,243 @@
+# Dopamind — Complete Project Context for Cursor
+
+## What Is This App
+
+Dopamind is a gamified ADHD productivity SaaS web app for adults. The core loop is:
+
+- User adds a task
+- Picks a focus timer (5/15/25/45/60 min)
+- Focuses — a tree grows visually in real time
+- Timer completes → tree is saved to their virtual forest
+- Abandon the timer → tree dies (dead tree saved)
+- Forest grows over days → streak system tracks consistency
+
+Inspired by the Forest app, Habitica, and CBT-based ADHD research. Built for adults with ADHD who struggle with focus, task initiation, and consistency.
+
+**Also referenced in repo:** `CLAUDE.md` (historical ClarifyMind notes); product brand in UI is **Dopamind**.
+
+---
+
+## Stack
+
+| What | Technology |
+|------|------------|
+| Framework | Next.js 14 App Router |
+| Database + Auth | Supabase (PostgreSQL, Frankfurt EU) |
+| AI | Groq API — model `llama-3.1-8b-instant` |
+| Forest renderer | PixiJS 7.4.2 (WebGL, client-side only) |
+| Animation | Framer Motion |
+| Styling | Tailwind CSS |
+| Language | TypeScript |
+| Mobile | Capacitor (wraps Vercel app for Android + iOS) |
+
+**Dev command**
+
+```bash
+cd C:\Users\SAHIL\clarifymind\apps\web && npm run dev
+```
+
+Local: http://localhost:3000
+
+---
+
+## How the App Is Deployed
+
+- **Web:** Vercel at https://dopamind-w3fp.vercel.app
+- **Mobile:** Capacitor wraps this Vercel URL — Android/iOS WebView points at production Vercel. No local bundled web build for the live app shell.
+- **Android:** `android/` in repo, open in Android Studio.
+- **iOS:** Not yet generated (`npx cap add ios` not run yet).
+
+### Capacitor Config (`capacitor.config.ts`)
+
+- `appId`: `com.dopamind.app`
+- `appName`: `Dopamind`
+- `webDir`: `out`
+- `server.url`: `https://dopamind-w3fp.vercel.app` — loads from Vercel, not local
+
+### Key Capacitor Commands
+
+```bash
+npx cap sync android      # after any config/web change
+npx cap sync ios          # after any config/web change
+npx cap open android      # opens Android Studio
+npx cap add ios           # generates iOS project (NOT DONE YET)
+```
+
+**Rule:** After ANY change to `capacitor.config.ts`, run `npx cap sync android` (and `ios` when applicable), then rebuild in Android Studio / Xcode.
+
+---
+
+## Full File Map
+
+### Auth (`src/app/(auth)/`)
+
+| File | What it does |
+|------|----------------|
+| `login/page.tsx` | Email + password login. Green brand design. On success → `/tasks` |
+| `signup/page.tsx` | Email + password signup. Creates Supabase auth user. On success → `/survey/1` |
+| `forgot-password/page.tsx` | Sends Supabase password reset email |
+| `survey/1/page.tsx` | Onboarding — 5 ADHD-related questions (page 1 of 2) |
+| `survey/2/page.tsx` | Onboarding — 5 more questions. Saves answers to `users.consent_version` as JSON. Then → `/tasks` |
+
+**Also in repo:** `src/app/auth/reset-password/page.tsx` — password reset completion (outside `(auth)` group).
+
+### Dashboard (`src/app/(dashboard)/`)
+
+| File | What it does |
+|------|----------------|
+| `tasks/page.tsx` | **MAIN PAGE.** 6-tab interface: Today / Add / Progress / Search / Focus / Reflect. Task CRUD, timer, AI breakdown, steps, cheer overlay, flying tree |
+| `planner/page.tsx` | **PRO.** AI Daily Planner. Energy/mood, tasks → Groq schedule. Active Mode + circular timer |
+| `bodydouble/page.tsx` | **PRO.** Body doubling — virtual room, presence, accountability |
+| `myworld/page.tsx` | **PRO.** Forest (PixiJS), Stats (D/W/M chart), Leaderboard |
+| `settings/page.tsx` | Settings. Medication reminders (`medication_reminders` table) |
+| `reflect/page.tsx` | Daily reflection — energy + mood logging |
+| `progress/page.tsx` | Progress overview |
+| `search/page.tsx` | Task search |
+| `focus/page.tsx` | Dedicated focus mode |
+| `timer/page.tsx` | Timer page |
+| `dashboard/page.tsx` | Dashboard overview |
+
+### Marketing (`src/app/(marketing)/`)
+
+| File | What it does |
+|------|----------------|
+| `page.tsx` | Landing — hero, features, CTA |
+| `pricing/page.tsx` | Free vs PRO. Razorpay "coming soon" |
+| `upgrade/page.tsx` | Paywall after trial |
+| `blog/page.tsx` | Blog index — 6 articles |
+| `blog/[id]/page.tsx` | Single blog post |
+
+### API (`src/app/api/`)
+
+| File | What it does |
+|------|----------------|
+| `ai/route.ts` | POST. `{ prompt }` or `{ taskTitle }` → Groq → step breakdown JSON array of strings |
+| `planner/route.ts` | POST. `{ prompt }` → Groq → DayPlan JSON |
+| `streak/route.ts` | POST. No body. Updates `user_streaks` for auth user |
+| `tree/route.ts` | POST. `{ task_id, timer_duration, status }` → `forest_trees` |
+| `validate-proof/route.ts` | POST. `{ taskTitle, proof, durationMinutes }` → Groq → `{ valid, feedback }` |
+
+### Components (`src/components/`)
+
+| File | What it does |
+|------|----------------|
+| `layouts/navbar.tsx` | Fixed nav: Tasks, PRO links, timer pill, streak (→ `/myworld`), trial badge, flying tree, avatar initial, sign out |
+| `ui/growing-tree.tsx` | SVG tree: `progress`, `size`, `isDead`, `isWilting`, `durationMinutes` |
+| `ui/pixi-forest.tsx` | PixiJS 7.4.2 isometric forest — dynamic import `{ ssr: false }` |
+| `ui/proof-modal.tsx` | Written proof of task completion |
+| `ui/button.tsx`, `input.tsx`, `label.tsx`, `card.tsx`, `badge.tsx`, `separator.tsx`, `progress.tsx`, `dialog.tsx`, `sheet.tsx`, `sonner.tsx` | shadcn/ui base |
+
+### Context (`src/context/`)
+
+| File | What it does |
+|------|----------------|
+| `timer-context.tsx` | Global timers, `flyingTrees`, `globalStreak`. **Always use `useTimer()`** — never duplicate timer state locally |
+
+### Lib (`src/lib/`)
+
+| File | What it does |
+|------|----------------|
+| `supabase/client.ts` | Browser Supabase — use in `'use client'` |
+| `supabase/server.ts` | Server Supabase — API routes, server components |
+| `supabase/middleware.ts` | Session refresh middleware |
+| `ambient-sound.ts` | Web Audio — rain, forest, ocean, white noise (`AmbientSoundPlayer`) |
+| `openai/gemini.ts` | AI client wrapper |
+| `utils/cn.ts` | `cn()` class merge |
+| `utils/date.ts` | Date helpers |
+
+### Root
+
+| File | What it does |
+|------|----------------|
+| `src/app/layout.tsx` | Root layout, `<TimerProvider>`, metadata title "Dopamind" |
+| `src/app/globals.css` | Tailwind + global styles |
+| `capacitor.config.ts` | Capacitor mobile config |
+| `.env.local` | Secrets — never commit, never paste values in chat |
+| `CLAUDE.md` | Extended project notes |
+
+---
+
+## Database Tables (Supabase)
+
+- `users` — id, plan (`'free'`|`'pro'`), `trial_ends_at`, `created_at`, `consent_version` (survey JSON)
+- `tasks` — id, user_id, title, bucket, status, priority, steps (jsonb), created_at, completed_at
+- `forest_trees` — id, user_id, task_id, tree_type, status, timer_duration, grown_at, died_at
+- `user_streaks` — id, user_id, current_streak, longest_streak, last_active_date, total_trees_grown, total_trees_lost, forest_acres
+- `leaderboard` — id, user_id, display_name, current_streak, forest_size, total_trees, rank
+- `daily_reflections` — id, user_id, energy_level, mood_level, notes, plan_date
+- `focus_sessions` — id, user_id, task_id, duration_s, completed
+- `medication_reminders` — id, user_id, reminder_time, label, active
+
+---
+
+## Timer → Tree Type
+
+| Minutes | Tree |
+|---------|------|
+| 5 | sprout |
+| 15 | baby |
+| 25 | half |
+| 30 | flowering |
+| 45 | large (tall pine) |
+| 60 | full (grand lush) |
+| abandoned | dead (grey bare trunk) |
+
+---
+
+## Trial + PRO Access Logic
+
+Use this pattern on **every** PRO page:
+
+```typescript
+const trialEnd = userData?.trial_ends_at
+  ? new Date(userData.trial_ends_at)
+  : new Date(new Date(userData?.created_at).getTime() + 14 * 864e5)
+
+const hasAccess = userData?.plan === 'pro' || trialEnd > new Date()
+const daysLeft = Math.max(0, Math.ceil((trialEnd.getTime() - Date.now()) / 864e5))
+```
+
+- Free trial = 14 days from `created_at` (with `trial_ends_at` override when set)
+- `plan === 'pro'` = unlimited
+- After trial → upgrade paywall (`/upgrade`)
+
+---
+
+## Design System
+
+- Primary green: `#16A34A` — buttons, active states
+- Dark green: `#15803D` — gradient end, hover
+- Purple: `#7C3AED` — PRO badges, AI features
+- Blue: `#2563EB` — AI planner accent
+- Background: `#FFFFFF` — Card: `#F8FAFC`, border: `#F1F5F9`
+- Text: `#1E293B` — secondary: `#64748B` — muted: `#94A3B8`
+- Danger: `#EF4444` — Warning: `#F59E0B`
+
+Cards: `rounded-2xl p-4`. Buttons: `rounded-xl px-4 py-2.5 text-sm font-bold` — green gradient. PRO badge: ~8px text, gradient `#7C3AED` → `#2563EB`. Layout: `max-w-2xl mx-auto` where appropriate.
+
+---
+
+## Hard Rules for Cursor
+
+- Every React component file: `'use client'` at top
+- Auth: always `supabase.auth.getUser()` — never hardcode user IDs
+- Timer state: always `useTimer()` from `@/context/timer-context` — never local-only timer state for app-wide behavior
+- Supabase in components: `@/lib/supabase/client` | in API routes / server: `@/lib/supabase/server`
+- AI prompts stay in API routes only — not in frontend string prompts for model calls
+- Animations: Framer Motion — only animate `transform` and `opacity`
+- Never `transition-all` — specify the property
+- Never use default Tailwind blue/indigo as primary brand color
+- Never duplicate components or API routes without checking existing ones
+- Never commit `.env.local`
+- Capacitor: after **any** `capacitor.config.ts` change → `npx cap sync android` (and iOS when project exists) → rebuild native app
+
+### Environment variable names (never paste values in chat)
+
+`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `GROQ_API_KEY`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_ENV`
+
+---
+
+## Owner / Style
+
+- Owner: Sahil (Pune, India). Prefers direct, step-by-step, implementation-ready guidance.
+- Match existing patterns in the file being edited; avoid drive-by refactors.
