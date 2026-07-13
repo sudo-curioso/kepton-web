@@ -10,7 +10,7 @@ export default function ForestHeroVisual() {
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="relative mx-auto mt-12 w-full max-w-5xl sm:mt-16"
+      className="relative mx-auto mt-8 w-full max-w-5xl sm:mt-12 md:mt-16"
     >
       <div
         aria-hidden

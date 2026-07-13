@@ -89,7 +89,7 @@ export default function PricingSection() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#22C55E]">
             Pricing
           </p>
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
             Start free. Grow when you’re ready.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-neutral-400 sm:text-lg">
@@ -127,7 +127,7 @@ export default function PricingSection() {
               borderColor: annual ? 'rgba(34,197,94,0.45)' : 'rgba(255,255,255,0.12)',
             }}
             transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-            className="relative inline-flex h-8 w-14 shrink-0 items-center rounded-full border p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22C55E]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]"
+            className="relative inline-flex h-11 w-14 shrink-0 items-center rounded-full border p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22C55E]/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] sm:h-8 sm:w-14"
           >
             <motion.span
               className="block h-6 w-6 rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.45)]"
@@ -201,7 +201,7 @@ export default function PricingSection() {
 
             <div className="mb-1 flex items-start gap-0.5">
               <span className="mt-2 text-2xl font-semibold text-neutral-400">$</span>
-              <span className="text-5xl font-bold leading-none tracking-tight text-white [font-variant-numeric:tabular-nums]">
+              <span className="text-4xl font-bold leading-none tracking-tight text-white [font-variant-numeric:tabular-nums] sm:text-5xl">
                 0
               </span>
               <span className="mb-1 ml-1 self-end text-sm font-medium text-neutral-500">
@@ -218,9 +218,9 @@ export default function PricingSection() {
 
             <ul className="flex flex-col gap-3">
               {FEATURES.map(f => (
-                <li key={f.label} className="flex items-center justify-between gap-3">
+                <li key={f.label} className="flex items-start justify-between gap-3 sm:items-center">
                   <span
-                    className={`text-sm ${
+                    className={`min-w-0 flex-1 text-sm leading-snug ${
                       f.free === false ? 'text-neutral-600' : 'text-neutral-300'
                     }`}
                   >
@@ -241,7 +241,7 @@ export default function PricingSection() {
             viewport={{ once: true, margin: '-60px' }}
             variants={fadeUp}
             custom={3}
-            className="relative h-full md:scale-[1.04]"
+            className="relative h-full lg:scale-[1.04]"
           >
             {/* Recommended badge — kept outside the glare clip so it can overhang */}
             <div className="absolute -top-3 left-1/2 z-20 -translate-x-1/2">
@@ -287,7 +287,7 @@ export default function PricingSection() {
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -14, opacity: 0 }}
                   transition={{ type: 'spring', stiffness: 420, damping: 30 }}
-                  className="text-5xl font-bold leading-none tracking-tight text-white [font-variant-numeric:tabular-nums]"
+                  className="text-4xl font-bold leading-none tracking-tight text-white [font-variant-numeric:tabular-nums] sm:text-5xl"
                 >
                   {dollars}
                 </motion.span>
@@ -317,8 +317,8 @@ export default function PricingSection() {
                 Everything in Seedling, plus:
               </li>
               {FEATURES.map(f => (
-                <li key={f.label} className="flex items-center justify-between gap-3">
-                  <span className="text-sm text-neutral-200">{f.label}</span>
+                <li key={f.label} className="flex items-start justify-between gap-3 sm:items-center">
+                  <span className="min-w-0 flex-1 text-sm leading-snug text-neutral-200">{f.label}</span>
                   <Cell value={f.pro} accent />
                 </li>
               ))}

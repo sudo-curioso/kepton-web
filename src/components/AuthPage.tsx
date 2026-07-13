@@ -224,7 +224,7 @@ export default function AuthPage({ initialMode = 'signup' }: AuthPageProps) {
         className="pointer-events-none absolute -right-32 bottom-1/4 h-72 w-72 rounded-full bg-emerald-600/8 blur-3xl"
       />
 
-      <div className="relative mx-auto flex min-h-screen max-w-lg flex-col px-4 py-8 sm:px-6">
+      <div className="relative mx-auto flex min-h-screen max-w-lg flex-col px-4 py-[max(2rem,env(safe-area-inset-top))] pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-6">
         <Link
           href="/"
           className="mb-8 inline-flex w-fit items-center gap-2 text-sm text-neutral-400 transition-colors hover:text-white"
@@ -241,7 +241,7 @@ export default function AuthPage({ initialMode = 'signup' }: AuthPageProps) {
         >
           <div className="mb-8 text-center">
             <KeptonLogo size="lg" href="/" wordmarkClassName="text-lg font-semibold tracking-tight" />
-            <h1 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h1 className="mt-6 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
               {mode === 'signup' ? 'Create your account' : 'Welcome back'}
             </h1>
             <p className="mt-2 text-sm text-neutral-400">

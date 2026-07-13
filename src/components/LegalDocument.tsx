@@ -87,7 +87,7 @@ export default function LegalDocument({ document }: { document: PolicyDocument }
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#22C55E]">
             Legal
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl">
             {document.title}
           </h1>
           {document.subtitle && (

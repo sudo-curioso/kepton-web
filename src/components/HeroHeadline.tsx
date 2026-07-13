@@ -11,7 +11,7 @@ const LINES = [
 ] as const
 
 const HEADLINE_CLASS =
-  'block text-center font-display text-[2.125rem] font-normal leading-[1.22] tracking-[0.015em] text-white/95 sm:text-5xl sm:leading-[1.18] sm:tracking-[0.012em] md:text-[3.25rem] md:leading-[1.16] lg:text-[3.5rem]'
+  'block text-center font-display text-[1.75rem] font-normal leading-[1.24] tracking-[0.015em] text-white/95 min-[400px]:text-[1.875rem] sm:text-5xl sm:leading-[1.18] sm:tracking-[0.012em] md:text-[3.25rem] md:leading-[1.16] lg:text-[3.5rem]'
 
 export default function HeroHeadline() {
   const lineOffsets = useMemo(() => {

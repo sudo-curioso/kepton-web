@@ -51,22 +51,22 @@ export default function HomePage() {
 
         <NavBar />
 
-        <div className="relative z-10 flex w-full flex-col pt-24">
+        <div className="relative z-10 flex w-full flex-col pt-[max(5.5rem,calc(env(safe-area-inset-top)+4.5rem))] sm:pt-24">
           <main className="flex flex-col items-center px-4 pb-10 text-center sm:px-6">
             <HeroHeadline />
 
-            <p className="mt-6 max-w-2xl text-lg font-normal text-neutral-400 sm:text-xl">
+            <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed text-neutral-400 sm:mt-6 sm:text-lg md:text-xl">
               Focus tools built for clarity — capture tasks, stay on track, and watch your
               forest grow with every session.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <GetStartedLink className="rounded-lg bg-[#F5F5F5] px-5 py-2.5 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white">
+            <div className="mt-7 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-8 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+              <GetStartedLink className="inline-flex min-h-11 items-center justify-center rounded-lg bg-[#F5F5F5] px-5 py-3 text-sm font-semibold text-[#0a0a0a] transition-colors hover:bg-white sm:py-2.5">
                 Get started
               </GetStartedLink>
               <a
                 href="/#features"
-                className="rounded-lg border border-white/[0.08] bg-[#111111] px-5 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-white"
+                className="inline-flex min-h-11 items-center justify-center rounded-lg border border-white/[0.08] bg-[#111111] px-5 py-3 text-sm font-medium text-neutral-400 transition-colors hover:border-white/[0.14] hover:text-white sm:py-2.5"
               >
                 Learn more
               </a>

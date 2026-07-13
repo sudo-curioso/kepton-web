@@ -82,7 +82,7 @@ export default function ForestSection() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#22C55E]">
             Forest
           </p>
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
+          <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
             Watch your focus become a forest
           </h2>
           <p className="mt-4 text-base leading-relaxed text-neutral-400 sm:text-lg">

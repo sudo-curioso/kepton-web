@@ -26,7 +26,7 @@ export default function SiteFooter() {
             </p>
             <a
               href={SUPPORT_MAILTO}
-              className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-white transition-colors hover:text-[#22C55E]"
+              className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-medium text-white transition-colors hover:text-[#22C55E]"
             >
               <Mail className="h-4 w-4 shrink-0 text-[#22C55E]" aria-hidden />
               {SUPPORT_EMAIL}
@@ -45,7 +45,7 @@ export default function SiteFooter() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-neutral-400 transition-colors hover:text-white"
+                    className="inline-flex min-h-11 items-center text-sm text-neutral-400 transition-colors hover:text-white"
                   >
                     {link.label}
                   </Link>
@@ -55,9 +55,9 @@ export default function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-2 border-t border-white/[0.06] pt-6 text-xs text-neutral-600 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-white/[0.06] pt-6 text-xs text-neutral-600 sm:flex-row sm:items-center sm:justify-between">
           <p>&copy; {new Date().getFullYear()} Kepton. All rights reserved.</p>
-          <p>
+          <p className="max-w-full break-words leading-relaxed">
             Operated by 2 Bros, Pune, Maharashtra, India ·{' '}
             <a href={SUPPORT_MAILTO} className="text-neutral-500 transition-colors hover:text-[#22C55E]">
               {SUPPORT_EMAIL}

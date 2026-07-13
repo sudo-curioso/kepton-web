@@ -33,7 +33,7 @@ export default function FocusTimerMockup() {
   const dot = progressDotPosition(INNER_R, PROGRESS)
 
   return (
-    <div className="relative mx-auto flex w-full max-w-[280px] flex-col items-center py-2">
+    <div className="relative mx-auto flex w-full max-w-[min(100%,280px)] flex-col items-center py-2 sm:max-w-[280px]">
       {/* Ambient bokeh — floats on parent glass card */}
       <div
         aria-hidden
