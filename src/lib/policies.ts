@@ -46,7 +46,7 @@ export const policies: Record<string, PolicyDocument> = {
       },
       {
         type: 'paragraph',
-        text: 'Contact for all notices under these Terms: keptonapp@gmail.com.',
+        text: 'Contact for all notices under these Terms: support@kepton.app.',
       },
       { type: 'heading', text: '2. Eligibility and Age Requirement' },
       {
@@ -144,7 +144,7 @@ export const policies: Record<string, PolicyDocument> = {
       { type: 'heading', text: '13. Termination' },
       {
         type: 'paragraph',
-        text: 'You may stop using the Service and delete your account at any time from within the app or by emailing keptonapp@gmail.com. We may suspend or terminate your access to the Service if you breach these Terms, if required by law, or if we discontinue the Service. Sections that by their nature should survive termination (including Sections 8 through 12 and 14) will survive.',
+        text: 'You may stop using the Service and delete your account at any time from within the app or by emailing support@kepton.app. We may suspend or terminate your access to the Service if you breach these Terms, if required by law, or if we discontinue the Service. Sections that by their nature should survive termination (including Sections 8 through 12 and 14) will survive.',
       },
       { type: 'heading', text: '14. Governing Law and Dispute Resolution' },
       {
@@ -178,7 +178,7 @@ export const policies: Record<string, PolicyDocument> = {
       { type: 'heading', text: '17. Contact' },
       {
         type: 'paragraph',
-        text: 'Questions about these Terms can be sent to keptonapp@gmail.com.',
+        text: 'Questions about these Terms can be sent to support@kepton.app.',
       },
     ],
   },
@@ -204,10 +204,10 @@ export const policies: Record<string, PolicyDocument> = {
         type: 'notice',
         text: 'ACTION NEEDED BEFORE PUBLISHING: Update this controller identity, and re-issue this Policy, if and when the operating entity is incorporated.',
       },
-      { type: 'paragraph', text: 'Privacy contact: keptonapp@gmail.com' },
+      { type: 'paragraph', text: 'Privacy contact: support@kepton.app' },
       {
         type: 'notice',
-        text: "ACTION NEEDED BEFORE PUBLISHING: India's DPDP Act requires a visible Grievance Officer contact once you have meaningful user volume. For now, keptonapp@gmail.com can serve this role, but note it here explicitly and update it if you appoint a dedicated Grievance Officer.",
+        text: "ACTION NEEDED BEFORE PUBLISHING: India's DPDP Act requires a visible Grievance Officer contact once you have meaningful user volume. For now, support@kepton.app can serve this role, but note it here explicitly and update it if you appoint a dedicated Grievance Officer.",
       },
       { type: 'heading', text: '2. What Information We Collect' },
       { type: 'heading', text: '2.1 Account information', level: 3 },
@@ -345,7 +345,7 @@ export const policies: Record<string, PolicyDocument> = {
       },
       {
         type: 'paragraph',
-        text: 'To exercise any of these rights, email keptonapp@gmail.com. We will respond within the timeframe required by the applicable law (generally 30 days).',
+        text: 'To exercise any of these rights, email support@kepton.app. We will respond within the timeframe required by the applicable law (generally 30 days).',
       },
       { type: 'heading', text: "10. Children's Privacy" },
       {
@@ -370,7 +370,7 @@ export const policies: Record<string, PolicyDocument> = {
       { type: 'heading', text: '14. Contact Us' },
       {
         type: 'paragraph',
-        text: 'For any privacy question, request, or complaint, contact keptonapp@gmail.com.',
+        text: 'For any privacy question, request, or complaint, contact support@kepton.app.',
       },
     ],
   },
@@ -452,7 +452,7 @@ export const policies: Record<string, PolicyDocument> = {
       },
       {
         type: 'paragraph',
-        text: 'If you contact keptonapp@gmail.com about a billing issue, we will help redirect you to the correct Apple or Google refund process, and will assist with any account-side issue (such as restoring access) within our control.',
+        text: 'If you contact support@kepton.app about a billing issue, we will help redirect you to the correct Apple or Google refund process, and will assist with any account-side issue (such as restoring access) within our control.',
       },
       { type: 'heading', text: '7. EU / UK 14-Day Withdrawal Right' },
       {
@@ -476,7 +476,7 @@ export const policies: Record<string, PolicyDocument> = {
       { type: 'heading', text: '10. Contact' },
       {
         type: 'paragraph',
-        text: 'For any subscription question not resolved by Apple or Google support, email keptonapp@gmail.com.',
+        text: 'For any subscription question not resolved by Apple or Google support, email support@kepton.app.',
       },
     ],
   },

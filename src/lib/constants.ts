@@ -4,7 +4,7 @@ export const PLAY_STORE_URL =
   process.env.NEXT_PUBLIC_PLAY_STORE_URL ??
   'https://play.google.com/store/apps/details?id=com.kepton.app'
 
-export const SUPPORT_EMAIL = 'keptonapp@gmail.com'
+export const SUPPORT_EMAIL = 'support@kepton.app'
 export const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`
 
 export const AUTH_SIGNUP_PATH = '/auth?mode=signup'
