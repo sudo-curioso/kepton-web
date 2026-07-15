@@ -9,6 +9,7 @@ import ForestSection from '@/components/ForestSection'
 import PlannerSection from '@/components/PlannerSection'
 import RoadmapSection from '@/components/RoadmapSection'
 import PricingSection from '@/components/PricingSection'
+import ComparisonSection from '@/components/ComparisonSection'
 import BlogSection from '@/components/BlogSection'
 import FaqSection from '@/components/FaqSection'
 import LightRays from '@/components/LightRays'
@@ -83,6 +84,7 @@ export default function HomePage() {
       <ForestSection />
       <PlannerSection />
       <RoadmapSection />
+      <ComparisonSection />
       <PricingSection />
       <BlogSection />
       <FaqSection />
