@@ -1,8 +1,10 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'motion/react'
 
 const FOREST_SRC = '/assets/images/forest/forest_small_medium_winter.png'
+const MotionImage = motion.create(Image)
 
 export default function ForestHeroVisual() {
   return (
@@ -24,10 +26,14 @@ export default function ForestHeroVisual() {
         aria-hidden
         className="pointer-events-none absolute inset-x-[8%] bottom-0 h-16 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent"
       />
-      <motion.img
+      <MotionImage
         src={FOREST_SRC}
         alt="Kepton forest island — grow your focus, session by session"
-        className="relative z-10 mx-auto w-full max-w-[min(92vw,22rem)] select-none object-contain mix-blend-lighten sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
+        width={960}
+        height={720}
+        priority
+        sizes="(max-width: 640px) 92vw, (max-width: 768px) 28rem, (max-width: 1024px) 32rem, 42rem"
+        className="relative z-10 mx-auto h-auto w-full max-w-[min(92vw,22rem)] select-none object-contain mix-blend-lighten sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />

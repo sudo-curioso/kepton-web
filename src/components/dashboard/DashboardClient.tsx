@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { motion } from 'motion/react'
 import {
@@ -283,9 +284,11 @@ export default function DashboardClient({ initialData }: DashboardClientProps) {
                     className="flex items-center gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.03]">
-                      <img
+                      <Image
                         src={treeImageSrc(tree.tree_type, tree.status)}
                         alt=""
+                        width={32}
+                        height={32}
                         className={`h-8 w-8 object-contain [image-rendering:pixelated] [image-rendering:crisp-edges] ${tree.status === 'alive' ? '' : 'grayscale opacity-50'}`}
                       />
                     </span>

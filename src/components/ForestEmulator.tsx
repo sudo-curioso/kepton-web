@@ -2,7 +2,10 @@
 
 import { AnimatePresence, motion } from 'motion/react'
 import { Bell, CalendarDays, Leaf, Moon, TreePine, User } from 'lucide-react'
+import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
+
+const MotionImage = motion.create(Image)
 
 export interface ForestEmulatorProps {
   phase: number
@@ -155,9 +158,11 @@ export default function ForestEmulator({ phase, cycle, onAdvance }: ForestEmulat
                 animate={{ y: [0, -9, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <motion.img
+                <MotionImage
                   src="/assets/forest/island.jpg"
                   alt="Your forest island"
+                  width={208}
+                  height={208}
                   draggable={false}
                   className="h-52 w-52 select-none object-contain mix-blend-lighten"
                   animate={{ rotate: [-1.6, 1.6, -1.6], scale: [1, 1.02, 1] }}

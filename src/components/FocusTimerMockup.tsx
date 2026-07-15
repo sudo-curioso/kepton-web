@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'motion/react'
 
 const SIZE = 240
@@ -140,12 +141,14 @@ export default function FocusTimerMockup() {
               animate={{ y: [0, -3, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <img
+              <Image
                 src={TREE_SRC}
                 alt=""
                 aria-hidden
+                width={Math.round(OUTER_R * 1.22)}
+                height={Math.round(OUTER_R * 1.22)}
                 draggable={false}
-                className="relative z-10 w-full select-none object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
+                className="relative z-10 h-full w-full select-none object-contain drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)]"
               />
             </motion.div>
           </div>

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 import Link from 'next/link'
 import { AUTH_SIGNUP_PATH } from '@/lib/constants'
@@ -22,15 +23,14 @@ function PlayStoreBadge({ size }: { size: keyof typeof BADGE_HEIGHT }) {
   const width = Math.round(height * BADGE_ASPECT)
 
   return (
-    <img
+    <Image
       src={GOOGLE_PLAY_BADGE}
       alt="Get it on Google Play"
       width={width}
       height={height}
       className="block"
       style={{ width, height }}
-      loading="lazy"
-      decoding="async"
+      priority={size === 'lg'}
     />
   )
 }

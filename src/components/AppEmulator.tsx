@@ -16,6 +16,7 @@ import {
   X,
 } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 const TASK_TITLE = 'Maths problem solving'
 const MICRO_STEPS = [
@@ -134,11 +135,12 @@ function TreeSequence({ grow, px }: { grow: number; px: number }) {
       animate={{ scale: [1, 1.015, 1] }}
       transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={treeFrame(idx)}
         alt=""
         aria-hidden
+        width={px}
+        height={px}
         draggable={false}
         className="h-full w-full select-none object-cover mix-blend-lighten"
         style={{ maskImage: mask, WebkitMaskImage: mask }}

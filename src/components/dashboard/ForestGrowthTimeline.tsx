@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'motion/react'
 import type { ForestTree } from '@/lib/types/dashboard'
 import { formatRelativeTime } from '@/lib/dashboard/queries'
@@ -46,9 +47,11 @@ export default function ForestGrowthTimeline({ trees, newTreeId }: ForestGrowthT
                   alive ? 'border-white/[0.1] bg-white/[0.04]' : 'border-red-500/20 bg-red-500/5'
                 }`}
               >
-                <img
+                <Image
                   src={treeImageSrc(tree.tree_type, tree.status)}
                   alt=""
+                  width={32}
+                  height={32}
                   className={`h-8 w-8 object-contain [image-rendering:pixelated] [image-rendering:crisp-edges] ${alive ? '' : 'grayscale opacity-50'}`}
                 />
               </span>
