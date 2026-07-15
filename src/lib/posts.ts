@@ -1,6 +1,7 @@
 export type Block =
   | { type: 'paragraph'; text: string }
   | { type: 'heading'; text: string }
+  | { type: 'answer'; text: string }
   | { type: 'table'; head: [string, string]; rows: [string, string][] }
 
 export interface Post {
@@ -14,6 +15,21 @@ export interface Post {
   /** Short intro/standfirst shown under the title on the article page. */
   lede: string
   content: Block[]
+}
+
+export type FaqPair = { question: string; answer: string }
+
+/** Derive FAQPage Q&A pairs from Answer-First heading → answer blocks. */
+export function getPostFaq(post: Post): FaqPair[] {
+  const pairs: FaqPair[] = []
+  for (let i = 0; i < post.content.length; i += 1) {
+    const block = post.content[i]
+    const next = post.content[i + 1]
+    if (block?.type === 'heading' && next?.type === 'answer') {
+      pairs.push({ question: block.text, answer: next.text })
+    }
+  }
+  return pairs
 }
 
 export const posts: Post[] = [
@@ -40,7 +56,15 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'You wonder why even a game feels too exhausting to maintain for more than a few days. You look at the static dashboard and feel the heavy weight of another dropped goal. Your inability to keep up with these gaming setups is not a character flaw, it is the predictable failure of platforms designed with hidden neurotypical rules.',
       },
-      { type: 'heading', text: 'The Novelty Crash and the Dopamine Deficit' },
+      {
+        type: 'heading',
+        text: 'Why do gamified ADHD apps stop working after a few days?',
+      },
+      {
+        type: 'answer',
+        text:
+          'Gamified ADHD apps usually fail once novelty fades because they depend on temporary dopamine spikes, then demand admin-heavy routines your executive system cannot sustain. The crash is neurological—not laziness—and it worsens when apps add complexity, guilt penalties, and neurotypical accountability rules.',
+      },
       {
         type: 'paragraph',
         text: 'When we search for a gamified ADHD app, we are looking for an emergency spark to kickstart our stalled attention. Our nervous system operates with a chronic dopamine deficit, meaning our baseline levels of this vital chemical are significantly lower than average. Dopamine functions as the primary cellular fuel that allows a brain to bridge the gap between intending to do a task and actually moving our body. A new app provides a temporary rush of absolute novelty, which floods our system with that missing chemical. We mistake this initial chemical surge for long-term consistency, believing we have finally found the ultimate answer.',
@@ -53,7 +77,28 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'As one member of our community recently shared, I always download these gamified setups hoping for a fun experience, but the excitement dies in three days and my executive dysfunction completely takes over. We do not abandon the system because we are lazy or unmotivated. We walk away because our unique neurology cannot sustain actions without continuous, fresh chemical rewards.',
       },
-      { type: 'heading', text: 'The Cognitive Burden of Complex Game Systems' },
+      {
+        type: 'heading',
+        text: 'How does novelty crash collide with the ADHD dopamine deficit?',
+      },
+      {
+        type: 'answer',
+        text:
+          'ADHD brains run on a chronic dopamine deficit, so new game skins feel magical for a short window. When the novelty crash hits, the same taps become unpaid labor. Without fresh chemical reward, executive dysfunction locks initiation—and the “fun” dashboard becomes another avoided chore.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Novelty is a scarce resource for ADHD focus. Tools that only perform during the honeymoon phase are not habit systems; they are temporary stimulants. Sustainable design must keep delivering low-friction reward after the first week—not more menus layered on top of yesterday’s dopamine.',
+      },
+      {
+        type: 'heading',
+        text: 'Why do complex game systems overload ADHD working memory?',
+      },
+      {
+        type: 'answer',
+        text:
+          'Point systems, inventories, and multi-layered stats look entertaining in demos, but each extra menu taxes limited willpower. ADHD working memory burns out managing fantasy logistics before a real task starts, causing choice paralysis—then abandonment as the brain protects remaining cognitive fuel.',
+      },
       {
         type: 'paragraph',
         text: 'Many digital tools try to gamify our schedules by adding extensive point systems, inventory management, and multi-layered character statistics. While this approach looks highly entertaining in online video tutorials, it introduces massive amounts of structural friction into our daily lives. Every single extra menu, stat point, and custom attribute acts as a small tax on our limited store of daily willpower. We find ourselves forced to manage a complex fantasy simulation before we can even log a single task. This intricate setup quickly causes severe choice paralysis, leaving our working memory completely overloaded with unnecessary decisions.',
@@ -66,7 +111,15 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'We slide away from tracking our routines, letting our schedules disintegrate back into chaotic emergency management. The accumulation of trivial digital friction eventually forces us to abandon the system completely.',
       },
-      { type: 'heading', text: 'The Guilt Mechanics That Trigger Our Shame Spiral' },
+      {
+        type: 'heading',
+        text: 'How do guilt mechanics trigger an ADHD shame spiral?',
+      },
+      {
+        type: 'answer',
+        text:
+          'Missed streaks that damage avatars, towns, or items weaponize rejection-sensitive dysphoria. A minor skip becomes proof you are “broken,” so avoidance locks in. Guilt-based gamification converts a support tool into a monument of failure you stop opening to survive emotionally.',
+      },
       {
         type: 'paragraph',
         text: 'The emotional toll of walking away from another productivity tool goes far deeper than a messy desk or an unorganized calendar. Most gamified platforms build their systems around traditional concepts of accountability, using harsh penalties to keep users engaged. If you miss a single daily checklist, your virtual character loses health, your virtual town gets damaged, or your hard-earned digital items disappear. For a neurodivergent mind, these punitive design choices backfire in a deeply destructive way. The sudden loss of progress triggers our rejection sensitive dysphoria, transforming a minor setback into an agonizing emotional blow.',
@@ -79,7 +132,15 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'The tool itself turns into a digital monument to our personal guilt, reminding us of everything we failed to achieve. We look at the notification alerts with a growing sense of baseline anxiety. This chronic fear of failure keeps us permanently stuck, making us deeply hesitant to trust any new solution that enters our field of vision.',
       },
-      { type: 'heading', text: 'The Paradigm Shift: Why Traditional Designs Destroy Consistency' },
+      {
+        type: 'heading',
+        text: 'Why do traditional accountability designs destroy ADHD consistency?',
+      },
+      {
+        type: 'answer',
+        text:
+          'Apps built on “discipline or else” assume consistency equals moral effort. Strict penalties and loud alerts ignore time blindness and executive challenges, turning software into a digital boss. ADHD consistency needs low-friction reward and gentleness—not pressure that collapses after hyperfocus fades.',
+      },
       {
         type: 'paragraph',
         text: 'Mainstream developers build their systems on the assumption that consistency is a matter of discipline and moral effort. They believe that if they make the rules strict enough or the penalties severe enough, our behavior will naturally adapt. This rigid perspective entirely ignores the reality of living with severe time blindness and executive challenges. When an application attempts to force compliance through high-stress alerts and loud push notifications, it operates as a digital boss rather than a helpful assistant. This counterproductive approach explains why do ADHD people abandon apps so rapidly after the initial hyperfocus phase ends.',
@@ -92,7 +153,15 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'True progress happens when we entirely reject the idea that pressure creates sustainable habits. We must transition to a completely new model that replaces systemic guilt with immediate, low-friction positive reinforcement. This shift allows our minds to engage peacefully without triggering our internal defense mechanisms.',
       },
-      { type: 'heading', text: 'The True Anatomy of an ADHD-Friendly Tool' },
+      {
+        type: 'heading',
+        text: 'What does an ADHD-friendly productivity tool actually need?',
+      },
+      {
+        type: 'answer',
+        text:
+          'ADHD-friendly tools lower initiation cost, deliver instant dopamine feedback, remove guilt badges, make progress clearly visible to counter time blindness, and sustain novelty without admin theater. When friction drops and reward stays gentle, tracking becomes real support—not another shameful abandoned setup.',
+      },
       {
         type: 'paragraph',
         text: 'To successfully bypass the challenges of task initiation, we must utilize systems designed specifically for our neurodivergent traits. A successful environment must lower the cognitive cost required to take that very first step forward. The table below outlines the essential structural shifts required to create an effective habit tracking ADHD routine without causing emotional burnout.',
@@ -127,7 +196,15 @@ export const posts: Post[] = [
         type: 'paragraph',
         text: 'By integrating these specific elements into our daily lives, we can stop forcing our minds to conform to an unnatural standard of behavior. We no longer have to rely on panic, pressure, or high-stress deadlines to force ourselves into motion. Shifting the focus from complex management to simple visual growth lets us preserve our precious cognitive reserves. We can finally transform organization into a supportive, therapeutic practice rather than a source of daily anxiety.',
       },
-      { type: 'heading', text: 'Cultivating a Safe Ecosystem for Lasting Focus' },
+      {
+        type: 'heading',
+        text: 'How does gamified focus help ADHD without burning out?',
+      },
+      {
+        type: 'answer',
+        text:
+          'Gamified focus helps ADHD when reward is immediate and visual—plant a seed, grow a tree, build a forest—without penalties if you miss a day. That pattern converts invisible time into tangible progress, sustains novelty gently, and never turns a skipped session into a destroyed avatar or shame spiral.',
+      },
       {
         type: 'paragraph',
         text: 'Imagine starting your morning by opening a beautifully lightweight interface where your single action is to plant a virtual seed. There are no complicated databases to configure, no confusing tags to organize, and no massive lists of past-due reminders waiting to trigger your anxiety. You simply pick an assignment, plant your seed, and watch as a clean graphic element anchors your focus to the screen. As you quietly dedicate yourself to your work, that little seed slowly begins to transform into a mature, unique tree.',

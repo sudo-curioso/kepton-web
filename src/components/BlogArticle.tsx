@@ -29,6 +29,14 @@ function ArticleBlock({ block }: { block: Block }) {
     )
   }
 
+  if (block.type === 'answer') {
+    return (
+      <p className="mt-4 rounded-2xl border border-[#22C55E]/15 bg-[#22C55E]/[0.06] px-4 py-3.5 text-[16px] leading-relaxed text-white sm:text-[17px] sm:leading-[1.65]">
+        <strong className="font-semibold">{block.text}</strong>
+      </p>
+    )
+  }
+
   if (block.type === 'table') {
     return (
       <div className="mt-8 overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl">
