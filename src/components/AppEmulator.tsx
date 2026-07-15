@@ -138,7 +138,7 @@ function TreeSequence({ grow, px }: { grow: number; px: number }) {
       <Image
         src={treeFrame(idx)}
         alt=""
-        aria-hidden
+        aria-hidden="true"
         width={px}
         height={px}
         draggable={false}

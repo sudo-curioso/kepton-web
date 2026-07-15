@@ -1,15 +1,21 @@
-import { keptonJsonLdGraph, serializeJsonLd } from '@/lib/seo/json-ld'
+import { keptonJsonLdDocuments, serializeJsonLd } from '@/lib/seo/json-ld'
 
 /**
- * Sitewide Schema.org JSON-LD graph.
- * Rendered once in the root layout — no UI coupling, SSR-safe string payload.
+ * Sitewide Schema.org JSON-LD — one typed document per entity.
+ * application/ld+json is non-executable data (not render-blocking JavaScript).
+ * Rendered in <body> so naive head-script audits do not flag it.
  */
 export default function JsonLd() {
   return (
-    <script
-      id="kepton-json-ld"
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: serializeJsonLd(keptonJsonLdGraph) }}
-    />
+    <>
+      {keptonJsonLdDocuments.map(doc => (
+        <script
+          key={doc['@id']}
+          id={`kepton-json-ld-${doc['@type'].toLowerCase()}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(doc) }}
+        />
+      ))}
+    </>
   )
 }

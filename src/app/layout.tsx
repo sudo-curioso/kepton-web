@@ -33,7 +33,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${display.variable} h-full overflow-x-clip`}>
+      {/* No synchronous JS scripts in <head> — fonts via next/font (non-blocking). */}
       <body className={`${inter.className} h-full overflow-x-clip`}>
+        {/* JSON-LD: application/ld+json data blocks (not classic JS) — safe for SEO parsers */}
         <JsonLd />
         {children}
       </body>

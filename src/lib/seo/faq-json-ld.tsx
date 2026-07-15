@@ -23,7 +23,18 @@ export function buildFaqPageJsonLd(post: Post, faq: FaqPair[] = getPostFaq(post)
       '@type': 'BlogPosting',
       '@id': `${pageUrl}#article`,
       headline: post.title,
+      description: post.excerpt,
       url: pageUrl,
+      author: {
+        '@type': 'Organization',
+        name: 'Kepton',
+        url: SITE_ORIGIN,
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Kepton',
+        url: SITE_ORIGIN,
+      },
     },
   }
 }
@@ -37,6 +48,7 @@ export function FaqPageJsonLd({ post }: { post: Post }) {
     <script
       id={`kepton-faq-${post.slug}`}
       type="application/ld+json"
+      // JSON-LD is non-executable data — not render-blocking JavaScript
       dangerouslySetInnerHTML={{ __html: serializeJsonLd(data) }}
     />
   )

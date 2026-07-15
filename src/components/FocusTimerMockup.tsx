@@ -143,8 +143,7 @@ export default function FocusTimerMockup() {
             >
               <Image
                 src={TREE_SRC}
-                alt=""
-                aria-hidden
+                alt="Kepton focus timer with a growing pine tree"
                 width={Math.round(OUTER_R * 1.22)}
                 height={Math.round(OUTER_R * 1.22)}
                 draggable={false}

@@ -15,6 +15,26 @@ const securityHeaders = [
 const nextConfig = {
   // Match sitemap.xml (no trailing slashes) — avoids /page vs /page/ duplicate content.
   trailingSlash: false,
+  async redirects() {
+    return [
+      // Guard against accidental trailing-slash hits on SEO artifacts
+      { source: '/sitemap.xml/', destination: '/sitemap.xml', permanent: true },
+      { source: '/robots.txt/', destination: '/robots.txt', permanent: true },
+    ]
+  },
+  /**
+   * Identity rewrite on /sitemap.xml so the MetadataRoute is served as a direct
+   * 200 OK resource — no trailing-slash rewrite and no internal redirect chain.
+   * beforeFiles runs ahead of the filesystem / page layer.
+   */
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: '/sitemap.xml', destination: '/sitemap.xml' },
+        { source: '/robots.txt', destination: '/robots.txt' },
+      ],
+    }
+  },
   async headers() {
     const indexFollow = {
       key: 'X-Robots-Tag',

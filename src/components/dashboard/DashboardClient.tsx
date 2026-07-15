@@ -286,7 +286,7 @@ export default function DashboardClient({ initialData }: DashboardClientProps) {
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.03]">
                       <Image
                         src={treeImageSrc(tree.tree_type, tree.status)}
-                        alt=""
+                        alt={`${formatTreeType(tree.tree_type)} ${tree.status === 'alive' ? 'growing' : 'withered'} in your Kepton forest`}
                         width={32}
                         height={32}
                         className={`h-8 w-8 object-contain [image-rendering:pixelated] [image-rendering:crisp-edges] ${tree.status === 'alive' ? '' : 'grayscale opacity-50'}`}

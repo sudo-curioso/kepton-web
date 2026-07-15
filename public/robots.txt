@@ -165,5 +165,5 @@ Disallow: /
 User-agent: libwww-perl
 Disallow: /
 
-# Canonical sitemap (App Router MetadataRoute — no trailing slash URLs)
-Sitemap: https://kepton.app/sitemap.xml
+# Canonical sitemap — www host returns 200 (apex redirects to www at the DNS/edge layer)
+Sitemap: https://www.kepton.app/sitemap.xml

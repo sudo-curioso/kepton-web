@@ -49,7 +49,7 @@ export default function ForestGrowthTimeline({ trees, newTreeId }: ForestGrowthT
               >
                 <Image
                   src={treeImageSrc(tree.tree_type, tree.status)}
-                  alt=""
+                  alt={`${formatTreeType(tree.tree_type)} ${alive ? 'planted' : 'withered'} — ${tree.timer_duration} min focus session`}
                   width={32}
                   height={32}
                   className={`h-8 w-8 object-contain [image-rendering:pixelated] [image-rendering:crisp-edges] ${alive ? '' : 'grayscale opacity-50'}`}
