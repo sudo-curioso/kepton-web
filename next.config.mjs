@@ -13,12 +13,34 @@ const securityHeaders = [
 ]
 
 const nextConfig = {
+  // Match sitemap.xml (no trailing slashes) — avoids /page vs /page/ duplicate content.
+  trailingSlash: false,
   async headers() {
+    const indexFollow = {
+      key: 'X-Robots-Tag',
+      value: 'index, follow, max-image-preview:large, max-snippet:-1',
+    }
+    const noindex = { key: 'X-Robots-Tag', value: 'noindex, nofollow' }
+
     return [
       {
         source: '/:path*',
         headers: securityHeaders,
       },
+      // Public pages — explicit allow for crawlers / AI agents (never noindex)
+      { source: '/', headers: [indexFollow] },
+      { source: '/blog', headers: [indexFollow] },
+      { source: '/blog/:path*', headers: [indexFollow] },
+      { source: '/download', headers: [indexFollow] },
+      { source: '/terms', headers: [indexFollow] },
+      { source: '/privacy', headers: [indexFollow] },
+      { source: '/subscription-policy', headers: [indexFollow] },
+      { source: '/health-disclaimer', headers: [indexFollow] },
+      // Session-gated surfaces — keep out of SERP / agent indexes
+      { source: '/dashboard', headers: [noindex] },
+      { source: '/dashboard/:path*', headers: [noindex] },
+      { source: '/auth', headers: [noindex] },
+      { source: '/auth/:path*', headers: [noindex] },
     ]
   },
 }

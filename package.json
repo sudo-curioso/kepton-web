@@ -9,7 +9,9 @@
     "audit:env": "node scripts/audit-public-env.mjs",
     "apply:supabase-auth": "node scripts/apply-supabase-auth-config.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:seo": "node test-seo.js",
+    "test:cdn-seo": "node test-cdn-seo.js"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.0",

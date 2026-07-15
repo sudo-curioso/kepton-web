@@ -13,6 +13,13 @@ function needsAuthSession(pathname: string): boolean {
   )
 }
 
+/**
+ * Edge middleware — session + HTTPS only.
+ * Intentional: no geo/IP/language blocks and no bot challenges.
+ * Search engines and AI crawlers (ChatGPT-User, ClaudeBot, PerplexityBot,
+ * Google-Extended, Googlebot, etc.) pass through on public routes unchanged.
+ * We never set X-Robots-Tag: noindex here (page headers handle public vs private).
+ */
 export async function middleware(request: NextRequest) {
   const httpsRedirect = enforceHttps(request)
   if (httpsRedirect) {
@@ -20,6 +27,11 @@ export async function middleware(request: NextRequest) {
   }
 
   const { pathname } = request.nextUrl
+
+  // Static SEO artifacts — no session work, crawler-friendly
+  if (pathname === '/robots.txt' || pathname === '/sitemap.xml' || pathname === '/favicon.ico') {
+    return applySecurityHeaders(NextResponse.next())
+  }
 
   if (isBlockedDebugRoute(pathname)) {
     return applySecurityHeaders(NextResponse.json({ error: 'Not found' }, { status: 404 }))

@@ -1,5 +1,5 @@
-# Kepton robots.txt — https://kepton.app
-# Allow search + friendly AI crawlers; block low-value / abusive scrapers.
+# Kepton robots.txt — https://kepton.app / https://www.kepton.app
+# Permit search + friendly AI crawlers on public paths; block scrapers / private areas.
 
 User-agent: *
 Allow: /
@@ -9,26 +9,78 @@ Disallow: /dashboard/
 Disallow: /auth
 Disallow: /auth/
 
-# --- Friendly AI / assistant crawlers (explicit allow) ---
+# --- Friendly AI search agents (explicit Allow on all public paths) ---
 User-agent: ChatGPT-User
 Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /download
+Allow: /terms
+Allow: /privacy
+Allow: /subscription-policy
+Allow: /health-disclaimer
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /auth
+Disallow: /auth/
 
+User-agent: PerplexityBot
+Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /download
+Allow: /terms
+Allow: /privacy
+Allow: /subscription-policy
+Allow: /health-disclaimer
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /auth
+Disallow: /auth/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /download
+Allow: /terms
+Allow: /privacy
+Allow: /subscription-policy
+Allow: /health-disclaimer
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /auth
+Disallow: /auth/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /download
+Allow: /terms
+Allow: /privacy
+Allow: /subscription-policy
+Allow: /health-disclaimer
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /auth
+Disallow: /auth/
+
+# --- Additional assistant / search crawlers ---
 User-agent: GPTBot
 Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
 
-User-agent: ClaudeBot
-Allow: /
-
 User-agent: anthropic-ai
 Allow: /
 
 User-agent: Claude-Web
-Allow: /
-
-User-agent: Google-Extended
 Allow: /
 
 User-agent: Googlebot
@@ -44,9 +96,6 @@ User-agent: Applebot
 Allow: /
 
 User-agent: Applebot-Extended
-Allow: /
-
-User-agent: PerplexityBot
 Allow: /
 
 User-agent: YouBot
@@ -116,4 +165,5 @@ Disallow: /
 User-agent: libwww-perl
 Disallow: /
 
+# Canonical sitemap (App Router MetadataRoute — no trailing slash URLs)
 Sitemap: https://kepton.app/sitemap.xml
